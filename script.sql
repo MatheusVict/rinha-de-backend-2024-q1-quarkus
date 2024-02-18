@@ -9,16 +9,16 @@ CREATE TABLE clientes
 CREATE TABLE transacoes
 (
     id         SERIAL PRIMARY KEY,
-    clienteId  integer     NOT NULL,
+    cliente_id  integer     NOT NULL,
     tipo       char(1)     NOT NULL,
     valor      integer     NOT NULL,
     descricao  varchar(10) NOT NULL,
-    efetuadaEm timestamp   NOT NULL
+    efetuada_em timestamp   NOT NULL
 );
 
 CREATE INDEX fk_transacao_clienteid ON transacoes
     (
-     clienteId ASC
+     cliente_id ASC
     );
 
 DELETE
