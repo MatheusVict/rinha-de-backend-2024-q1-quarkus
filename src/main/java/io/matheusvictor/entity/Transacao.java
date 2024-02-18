@@ -12,18 +12,17 @@ public class Transacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cliente_id", nullable = false)
-    private Long clienteId;
+    private Long cliente_id;
     private Integer valor;
     private String tipo;
     private String descricao;
 
     @CreationTimestamp
-    @Column(name = "efetuada_em", nullable = false, updatable = false)
-    private LocalDateTime efetuadaEm;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime efetuada_em;
 
-    public Transacao(Long clienteId, Integer valor, String tipo, String descricao) {
-        this.clienteId = clienteId;
+    public Transacao(Long cliente_id, Integer valor, String tipo, String descricao) {
+        this.cliente_id = cliente_id;
         this.valor = valor;
         this.tipo = tipo;
         this.descricao = descricao;
@@ -40,12 +39,12 @@ public class Transacao {
         this.id = id;
     }
 
-    public Long getClienteId() {
-        return clienteId;
+    public Long getCliente_id() {
+        return cliente_id;
     }
 
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente_id(Long cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
     public Integer getValor() {
@@ -72,12 +71,12 @@ public class Transacao {
         this.descricao = descricao;
     }
 
-    public LocalDateTime getEfetuadaEm() {
-        return efetuadaEm;
+    public LocalDateTime getEfetuada_em() {
+        return efetuada_em;
     }
 
-    public void setEfetuadaEm(LocalDateTime efetuadaEm) {
-        this.efetuadaEm = efetuadaEm;
+    public void setEfetuada_em(LocalDateTime efetuada_em) {
+        this.efetuada_em = efetuada_em;
     }
 
     public static Transacao createTransaction(CreateTransaction createTransaction, Long clienteId) {
