@@ -13,6 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Docker
+        run: |
+          sudo dnf -y update
+          sudo dnf -y install docker
+          sudo systemctl start docker
+          sudo systemctl enable docker
+          sudo docker --version
+          
       - name: Log in to Docker hub
         uses: docker/login-action@v2.2.0
         with:
