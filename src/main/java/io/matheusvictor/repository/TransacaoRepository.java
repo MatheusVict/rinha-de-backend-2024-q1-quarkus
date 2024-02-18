@@ -10,8 +10,7 @@ import java.util.List;
 @ApplicationScoped
 public class TransacaoRepository implements PanacheRepository<Transacao> {
     public Uni<List<Transacao>> find10LastTransactionsOrderedByDate(Long clienteId) {
-        return find("clienteId = ?1 order by efetuada_em desc LIMIT 10", clienteId)
-
+        return find("cliente_id = ?1 ORDER BY efetuada_em DESC LIMIT 10", clienteId)
                 .list();
     }
 }
