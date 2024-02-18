@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity(name = "clientes")
+@Cacheable
 public class Cliente {
     @Id
     private Long id;

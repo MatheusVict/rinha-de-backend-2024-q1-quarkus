@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity(name = "transacoes")
+@Cacheable
 public class Transacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

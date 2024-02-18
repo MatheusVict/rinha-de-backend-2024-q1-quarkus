@@ -5,12 +5,14 @@ services:
     image: matheusvict/rinha-de-backend-q1-quarkus:latest
     hostname: api01
     environment:
-      - PORT=8081
-      - MAX_CONNECTIONS=5
-      - DB_URL=postgresql://db:5431/rinha
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_USER=admin
-      - EVENT_LOOP_SIZE=4
+      - QUARKUS_DATASOURCE_DB_KIND=postgresql
+      - QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://db:5432/rinha
+      - QUARKUS_DATASOURCE_USERNAME=admin
+      - QUARKUS_DATASOURCE_PASSWORD=123
+      - QUARKUS_DATASOURCE_REACTIVE_SHARED=true
+      - QUARKUS_DATASOURCE_REACTIVE_MAX_SIZE=100
+      - QUARKUS_VERTX_MAX_EVENT_LOOP_EXECUTE_TIME=3000
+      - QUARKUS_DATASOURCE_REACTIVE_EVENT_LOOP_SIZE=4
     ports:
       - "8081:8080"
     depends_on:
@@ -20,9 +22,8 @@ services:
       resources:
         limits:
           cpus: '0.4'
-          memory: '125MB'
-    networks:
-      - rinha
+          memory: '145MB'
+
 
   api02:
     <<: *api
@@ -31,16 +32,17 @@ services:
       - db
       - api01
     environment:
-      - PORT=8082
-      - MAX_CONNECTIONS=5
-      - DB_URL=postgresql://db:5431/rinha
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_USER=admin
-      - EVENT_LOOP_SIZE=4
+      - QUARKUS_DATASOURCE_DB_KIND=postgresql
+      - QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://db:5432/rinha
+      - QUARKUS_DATASOURCE_USERNAME=admin
+      - QUARKUS_DATASOURCE_PASSWORD=123
+      - QUARKUS_DATASOURCE_REACTIVE_SHARED=true
+      - QUARKUS_DATASOURCE_REACTIVE_MAX_SIZE=100
+      - QUARKUS_VERTX_MAX_EVENT_LOOP_EXECUTE_TIME=3000
+      - QUARKUS_DATASOURCE_REACTIVE_EVENT_LOOP_SIZE=4
     ports:
       - "8082:8080"
-    networks:
-      - rinha
+
 
   nginx:
     image: nginx:latest
@@ -55,9 +57,8 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "50MB"
-    networks:
-      - rinha
+          memory: "10MB"
+
 
   db:
     image: postgres:latest
@@ -82,9 +83,9 @@ services:
       timeout: 5s
       retries: 20
       start_period: 10s
-    networks:
-      - rinha
+
 
 networks:
-  rinha:
+  default:
     driver: bridge
+    name: rinha-nginx-2024q1

@@ -1,3 +1,7 @@
+DROP TABLE transacoes;
+DROP TABLE clientes;
+
+
 CREATE TABLE clientes
 (
     id     INTEGER PRIMARY KEY NOT NULL,
@@ -31,4 +35,4 @@ VALUES (1, 'o barato sai caro', 0, 1000 * 100),
        (2, 'zan corp ltda', 0, 800 * 100),
        (3, 'les cruders', 0, 10000 * 100),
        (4, 'padaria joia de cocaia', 0, 100000 * 100),
-       (5, 'kid mais', 0, 5000 * 100);
+       (5, 'kid mais', 0, 5000 * 100);5
