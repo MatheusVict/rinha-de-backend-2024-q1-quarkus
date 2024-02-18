@@ -7,9 +7,9 @@ on:
 jobs:
   build:
 
-    runs-on: ubunt-latest
+    runs-on: ubuntu-latest
     container:
-      image: ubuntu:latest
+      image: fedora:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
