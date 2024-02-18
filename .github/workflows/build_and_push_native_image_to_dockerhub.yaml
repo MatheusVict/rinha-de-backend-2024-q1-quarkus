@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build Docker Native Image
 
 on:
   push:
@@ -6,10 +6,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     container:
-      image: fedora:latest
+      image: fedora:36
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -28,11 +27,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Build rinha API Container Image
-        run: mvn package clean package -DskipTests -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+        run: mvn package -Dquarkus.container-image.build=true -DskipTests
 
-      - name: Push to Docker Hub Container Resgisty
+      - name: Push to Docker Hub Container Registry
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-native:${{ github.run_id }}
-          docker tag ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-native:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-native:${{ github.run_id }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-native:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-reactive:${{ github.run_id }}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-reactive:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-reactive:${{ github.run_id }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/rinha-de-backend-q1-quarkus-reactive:latest
