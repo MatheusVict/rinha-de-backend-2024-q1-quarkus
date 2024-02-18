@@ -1,5 +1,6 @@
 package io.matheusvictor.entity;
 
+import io.matheusvictor.dto.CreateTransaction;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -77,5 +78,9 @@ public class Transacao {
 
     public void setEfetuadaEm(LocalDateTime efetuadaEm) {
         this.efetuadaEm = efetuadaEm;
+    }
+
+    public static Transacao createTransaction(CreateTransaction createTransaction, Long clienteId) {
+        return new Transacao(clienteId, createTransaction.valor(), createTransaction.tipo(), createTransaction.descricao());
     }
 }
