@@ -1,8 +1,8 @@
-DROP TABLE transacoes;
-DROP TABLE clientes;
+DROP TABLE IF EXISTS clientes;
+DROP TABLE IF EXISTS transacoes;
 
 
-CREATE TABLE clientes
+CREATE TABLE IF NOT EXISTS clientes
 (
     id     INTEGER PRIMARY KEY NOT NULL,
     nome   VARCHAR(25)         NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE clientes
     limite INTEGER             NOT NULL
 );
 
-CREATE TABLE transacoes
+CREATE TABLE IF NOT EXISTS transacoes
 (
     id         SERIAL PRIMARY KEY,
     cliente_id  integer     NOT NULL,
@@ -35,4 +35,4 @@ VALUES (1, 'o barato sai caro', 0, 1000 * 100),
        (2, 'zan corp ltda', 0, 800 * 100),
        (3, 'les cruders', 0, 10000 * 100),
        (4, 'padaria joia de cocaia', 0, 100000 * 100),
-       (5, 'kid mais', 0, 5000 * 100);5
+       (5, 'kid mais', 0, 5000 * 100);

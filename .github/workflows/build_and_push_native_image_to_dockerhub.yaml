@@ -12,15 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Install Docker
-        run: |
-          sudo dnf -y update
-          sudo dnf -y install docker
-          sudo systemctl start docker
-          sudo systemctl enable docker
-          sudo docker --version
-          
+        
       - name: Log in to Docker hub
         uses: docker/login-action@v2.2.0
         with:
@@ -35,7 +27,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build rinha API Container Image
-        run: mvn package -Dquarkus.container-image.build=true -DskipTests
+        run: mvn package clean package -DskipTests -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
 
       - name: Push to Docker Hub Container Registry
         run: |
